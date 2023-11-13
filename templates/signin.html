@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            transition: all 0.5s ease;
+            overflow: hidden;
+        }
+
+        .blue-side,
+        .white-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .blue-side {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .white-side {
+            background-color: #ecf0f1;
+            color: #3498db;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+            z-index: 1;
+        }
+
+        .sign-in-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+            /* Fixed width */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            color: #3498db;
+            font-size: 1.5em;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="blue-side" onclick="showForm('/buyer')">
+            <h2>Buyer</h2>
+        </div>
+        <div class="white-side" onclick="showForm('/seller')">
+            <h2>Seller</h2>
+        </div>
+    </div>
+
+    <div class="form-container" id="formContainer">
+        <div class="sign-in-form">
+            <span class="close-btn" onclick="closeForm()">X</span>
+            <h2>Sign In</h2>
+            <form id="signInForm" method="post" action="">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <input type="submit" value="Sign In">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showForm(route) {
+            document.getElementById('container').style.opacity = 0;
+            document.getElementById('formContainer').style.display = 'flex';
+            console.log(`${route} clicked`);
+
+            // Dynamically set the form action based on the user's selection
+            var form = document.getElementById('signInForm');
+            form.action = route;
+        }
+
+        function closeForm() {
+            document.getElementById('container').style.opacity = 1;
+            document.getElementById('formContainer').style.display = 'none';
+        }
+    </script>
+
+</body>
+
+</html>
+
